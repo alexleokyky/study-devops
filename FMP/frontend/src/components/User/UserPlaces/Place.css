@@ -1,0 +1,97 @@
+.user-places-wrapper {
+    padding: 0 40px;
+    margin-bottom: 0;
+    min-height: inherit;
+    background-color: #fff;
+}
+
+.places-search {
+    margin-bottom: 0;
+    padding: 20px 10px;
+}
+
+.places-search .row {
+    float: left;
+}
+
+.places-search #register-place {
+    display: block;
+    float: left;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    background-color: #1d2120;
+    border-radius: 4px;
+}
+
+.places-search #register-place:hover {
+    color: #e23c52;
+}
+
+.places-container {
+    height: 630px;
+    overflow: auto;
+}
+
+.map-place {
+    overflow: visible;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+}
+
+.leaflet-popup {
+    width: 420px;
+    overflow: visible !important;
+}
+
+.places-container .small {
+    width: 400px;
+    min-height: 480px !important;
+    margin: 10px;
+    float: left;
+    font-size: 14px;
+    border-radius: 3px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+
+.places-container .card-image,
+.places-container .card-content {
+    height: 50%;
+    position: relative;
+    max-height: none !important;
+}
+
+.places-container .card-content .place-info,
+.places-container .card-content .place-info .row {
+    margin-bottom: 10px;
+}
+
+.places-container .card-content .place-type  {
+    font-size: 14px;
+    color: #c7ccd5;
+}
+
+.places-container .card-content .place-name a {
+    font-size: 18px;
+    font-weight: 700;
+    display: block;
+    color: #1d2120;
+}
+
+.places-container .card-content .place-name a:hover {
+    color: #ff8d15;
+}
+
+.places-container .card-content .place-description {
+    height: 40px;
+}
+
+.places-container .card-content .additional-info .col {
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+

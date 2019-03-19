@@ -1,0 +1,40 @@
+.greeting {
+    padding: 200px 150px 0px;
+    color: #1d2120;
+    margin-bottom: 0px;
+}
+
+.greeting p, .greeting #learn-more {
+    display: block;
+}
+
+.greeting p {
+    color: #fff;
+    font-size: 40px;
+    text-align: left;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.greeting #learn-more {
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    width: 200px;
+    padding: 10px 30px;
+    border: 2px solid #fff;
+}
+
+.app-info {
+    margin-bottom: 0px;
+    padding: 200px 150px 0px;
+}
+
+.app-info h4, .app-info p {
+    color: #fff;
+}
+
+.app-info p {
+    font-size: 18px;
+}

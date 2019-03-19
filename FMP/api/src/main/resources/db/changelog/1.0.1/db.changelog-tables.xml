@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- Places_Managers -->
+    <changeSet id="1" author="rv036">
+        <createTable tableName="places_managers">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="place_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_place_id" references="places(id)"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Favorites -->
+    <changeSet id="2" author="rv036">
+        <createTable tableName="favorite">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="place_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_place_id" references="places(id)"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Place visit history -->
+    <changeSet id="3" author="rv036">
+        <createTable tableName="place_visit_history">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="place_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_place_id" references="places(id)"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"
+                             deleteCascade="true"/>
+            </column>
+
+            <column name="visit_time" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

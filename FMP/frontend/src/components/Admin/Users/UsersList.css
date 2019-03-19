@@ -1,0 +1,47 @@
+.users-list-wrapper .title {
+    padding: 0 1rem;
+    margin-bottom: 30px;
+}
+
+.users-list-table {
+    font-size: 14px;
+    padding: 0 1rem;
+}
+
+.users-list-table .user img {
+    width: 45px;
+    height: 45px;
+    float: left;
+    margin-right: 1rem;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.users-list-table .user a {
+    display: block;
+    padding-top: 4px;
+}
+
+.users-list-table .user .user-name {
+    color: #2bb6a3;
+}
+
+.users-list-table .user .user-role {
+    font-size: 12px;
+}
+
+.users-list-table .banned-user {
+    color: red;
+}
+
+.users-list-table .user-email {
+    color: #000000;
+}
+
+.users-list-table .delete-user {
+    width: 80px;
+}
+
+.users-list-table .send-email {
+    width: 168px;
+}

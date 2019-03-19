@@ -1,0 +1,6 @@
+.file-field .btn, .file-field .btn-large {
+    float: left;
+     height: 2.5rem;
+    background-color: #424242;
+     line-height: 2.5rem;
+}

@@ -1,0 +1,38 @@
+.styles_modal__gNwvD {
+    padding: 1.5rem;
+}
+
+.modal-msg {
+    font-size: 17px;
+    margin: 0 80px 20px 10px;
+}
+
+.modal-msg-rate {
+    font-size: 35px;
+    text-align: center;
+    margin: 0px;
+}
+
+.modal-btn {
+    margin: 0;
+    text-align: right;
+}
+
+.modal-btn button {
+    height: 32px;
+    line-height: 32px;
+    text-transform: none;
+    margin-right: 10px;
+    padding: 0 2rem;
+    background-color: #1d2120;
+    border-radius: 4px;
+}
+
+.modal-btn button:hover {
+    color: #e23c52;
+    background-color: #1d2120;
+}
+
+.styles_closeButton__20ID4 {
+    display: none;
+}
