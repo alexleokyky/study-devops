@@ -21,10 +21,9 @@ sudo systemctl start postgresql-9.6
 sudo systemctl enable postgresql-9.6
 # Create Role and login
 echo "-------------------- creating postgres developer role with password fmp_db"
-sudo su - postgres -c `psql -c 'CREATE ROLE developer WITH SUPERUSER LOGIN PASSWORD "repoleved"'`
-exit
+sudo su - postgres bash -c "psql -c \"CREATE ROLE developer WITH SUPERUSER LOGIN PASSWORD 'repoleved';\""
 echo "-------------------- creating FMP database"
 # Create FMP database
-sudo su - postgres -c `psql -c "createdb -E UTF8 -T template0 --locale=en_US.utf8 -O developer fmp_db"`
+sudo su - postgres psql -c "createdb -E UTF8 -T template0 --locale=en_US.utf8 -O developer fmp_db"
 systemctl restart postgresql-9.6
 
