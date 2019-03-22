@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
 
         SHELL
         db1.vm.provider "virtualbox" do |v|
-            v.name = "centos-api"
+            v.name = "fmp-db1-server"
         end
     end
     config.vm.define "fmp-api-server" do |api|
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
         SHELL
         #api.vm.provision "file", source: "~/Documents/alexleokyky/vagrant/FMP/api/", destination: "$HOME/remote/api/"
         api.vm.provider "virtualbox" do |v|
-            v.name = "centos-api"
+            v.name = "fmp-api-server"
         end
     end
 end
