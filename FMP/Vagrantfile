@@ -1,17 +1,47 @@
 # -*- mode: ruby -*-
 # # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
-  config.vm.hostname = "postgres1"
+    config.vm.define "fmp-db1-server" do |db1|
+        db1.vm.box = "centos/7"
+        db1.vm.hostname = "postgres1"
 
-  config.vm.network :forwarded_port, guest: 22, host: 12822, id: 'ssh'
-  config.vm.network :private_network, ip: '192.168.32.51'
+        db1.vm.network :forwarded_port, guest: 22, host: 12822, id: 'ssh'
+        db1.vm.network :private_network, ip: '192.168.32.51'
 
-  config.vm.provision "shell", inline: <<-SHELL
-sudo bash /vagrant/shell/db_master.sh
+        db1.vm.provision "shell", inline: <<-SHELL
+        sudo bash /vagrant/shell/db_master.sh
 
-SHELL
-  config.vm.provider "virtualbox" do |v|
-    v.name = "centos-api"
-  end
+        SHELL
+        db1.vm.provider "virtualbox" do |v|
+            v.name = "centos-api"
+        end
+    end
+    config.vm.define "fmp-api-server" do |api|
+        api.vm.box = "centos/7"
+        api.vm.hostname = "api"
+
+        api.vm.network :forwarded_port, guest: 22, host: 12822, id: 'ssh'
+        api.vm.network :private_network, ip: '192.168.33.52'
+
+        api.vm.provision "shell", inline: <<-SHELL
+            cd /opt/
+
+            #sudo wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz"
+
+            #sudo tar xzf jdk-8u201-linux-x64.tar.gz
+
+            #cd jdk1.8.0_201/
+            #sudo alternatives --install /usr/bin/java java /opt/jdk1.8.0_201/bin/java 2
+
+
+
+            sudo yum install -y maven
+            cd /vagrant/api/
+            sudo mvn clean spring-boot:run
+        SHELL
+        #api.vm.provision "file", source: "~/Documents/alexleokyky/vagrant/FMP/api/", destination: "$HOME/remote/api/"
+        api.vm.provider "virtualbox" do |v|
+            v.name = "centos-api"
+        end
+    end
 end

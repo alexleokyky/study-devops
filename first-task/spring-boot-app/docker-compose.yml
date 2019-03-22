@@ -1,0 +1,20 @@
+version: "2"
+services:
+  mongodb:
+    image: mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - ./db/data:/data/db
+  web:
+    build: .
+    ports:
+    - "5000:5000"
+    volumes:
+    - .:/code
+    depends_on:
+    - mongodb
+    links:
+    - mongodb
+    environment:
+    - DB_PORT_27017_TCP_ADDR=0.0.0.0
