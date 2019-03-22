@@ -20,8 +20,8 @@ Vagrant.configure("2") do |config|
         api.vm.box = "centos/7"
         api.vm.hostname = "api"
 
-        api.vm.network :forwarded_port, guest: 22, host: 12822, id: 'ssh'
-        api.vm.network :private_network, ip: '192.168.33.52'
+        api.vm.network :forwarded_port, guest: 22, host: 3000, id: 'ssh'
+        api.vm.network :private_network, ip: '192.168.32.52'
 
         api.vm.provision "shell", inline: <<-SHELL
             cd /opt/
