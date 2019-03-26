@@ -9,8 +9,8 @@ sudo yum install -y postgresql96-server postgresql96-contrib
 sudo /usr/pgsql-9.6/bin/postgresql96-setup initdb
 
 sudo rm -rf /var/lib/pgsql/9.6/data/*
-
-replication | sudo su - postgres -c "pg_basebackup -h 192.168.32.51 -D /var/lib/pgsql/9.6/data -R -P -U replication --xlog-method=stream"
+sudo chmod 0600 /vagrant/shell/slave/.pgpass
+sudo su - postgres -c "PGPASSFILE='/vagrant/shell/slave/.pgpass' pg_basebackup -h 192.168.32.51 -D /var/lib/pgsql/9.6/data -R -P -d 'host=192.168.32.51 port=5432 dbname=replication user=replication password=replication' --xlog-method=stream"
 sudo cat << EOF >> /var/lib/pgsql/9.6/data/recovery.conf
 trigger_file = '/var/lib/pgsql/9.6/data/trigger_file'
 EOF
