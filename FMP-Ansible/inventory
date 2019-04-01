@@ -2,20 +2,19 @@
 fmp_front ansible_connection=docker ansible_shell_executable=/bin/bash
 
 [api]
-192.168.1.11
+api_server ansible_connection=docker ansible_shell_executable=/bin/bash
 
 [db_master]
-192.168.1.12
+master_db_srv ansible_connection=docker ansible_shell_executable=/bin/bash
 
 [db_slave]
-192.168.1.13
+slave_db_srv ansible_connection=docker ansible_shell_executable=/bin/bash
 
-[db]
-192.168.1.13
-192.168.1.12
+[db:children]
+db_master
+db_slave
 
-[all]
-192.168.1.10
-192.168.1.11
-192.168.1.12
-192.168.1.13
+[all:children]
+front
+api
+db
