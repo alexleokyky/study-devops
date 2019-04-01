@@ -1,0 +1,23 @@
+.filter {
+    margin-bottom: 0;
+}
+
+.filter-wrapper button {
+    height: 32px;
+    line-height: 32px;
+    text-transform: none;
+    margin-right: 10px;
+    padding: 0 2rem;
+    background-color: #1d2120;
+    border-radius: 4px;
+}
+
+.filter-wrapper button:hover {
+    color: #e23c52;
+    background-color: #1d2120;
+}
+
+.filter-wrapper .dropdown-content {
+    background-color: #fff;
+    border-radius: 4px;
+}

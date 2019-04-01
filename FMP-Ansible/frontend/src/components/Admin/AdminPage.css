@@ -1,0 +1,104 @@
+.admin-page {
+    margin-bottom: 0 !important;
+    min-height: 850px;
+}
+
+.admin-menu-wrapper,
+.admin-view-features {
+    margin-bottom: 0 !important;
+    min-height: inherit !important;
+}
+
+.admin-menu-wrapper {
+    color: #fff;
+    text-align: center;
+    background-color: #1d2120;
+    border-bottom: 4px solid #e23c52;
+}
+
+.admin-menu .admin-avatar {
+    padding-top: 1.5rem;
+}
+
+.admin-menu .admin-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.admin-menu .admin-name {
+    font-size: 18px;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #cccccc;
+}
+
+.admin-menu .admin-menu-items .row {
+    margin: 0;
+    padding: 1rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-menu .admin-menu-items .row a {
+    color: #fff;
+    display: block;
+}
+
+.admin-menu .admin-menu-items .row:hover {
+    background-color: #191919;
+}
+
+.admin-menu .admin-menu-items .row img,
+.admin-view-features .admin-update img {
+    width: 25px;
+    height: 25px;
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+
+.admin-view-features {
+    padding: 1rem 2rem !important;
+    background-color: #fff;
+}
+
+.admin-view-features .feature-row {
+    margin-bottom: 0 !important;
+}
+
+.admin-view-features .tab-menu {
+    display: none;
+}
+
+.admin-view-features .admin-update-profile {
+    margin-bottom: 40px;
+}
+
+.admin-view-features .admin-update {
+    font-size: 20px;
+}
+
+.admin-view-features .admin-profile-field .field-name {
+    width: 20%;
+}
+
+.admin-view-features .input-field,
+.admin-view-features .admin-profile-field input {
+    width: 90%;
+    margin: 0;
+}
+
+.admin-view-features .admin-profile-btn {
+    text-align: center;
+}
+
+.admin-view-features .admin-profile-btn button {
+    height: 32px;
+    line-height: 32px;
+    text-transform: none;
+    padding: 0 1.5rem;
+    background: #ff4d4d;
+}
+
+.hidden {
+    display: none;
+}

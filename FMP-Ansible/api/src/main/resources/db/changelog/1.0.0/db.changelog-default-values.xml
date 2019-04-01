@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- Users -->
+    <changeSet id="1" author="rv036">
+        <insert tableName="users">
+            <column name="first_name" value="Vasya"/>
+            <column name="first_name" value="Vasya"/>
+            <column name="last_name" value="Pupkin"/>
+            <column name="phone" value="0935588774"/>
+            <column name="email" value="user@gmail.com"/>
+            <column name="nick_name" value="user"/>
+            <column name="password" value="$2a$10$DramkVeQZgQBpPf9KyE5Au5jWF.iRJD3wbRmCPDgw5nAviWMMpg2y"/>
+            <column name="role" value="ROLE_USER"/>
+            <column name="ban_status" value="NOT_BAN"/>
+            <column name="registration_date" value="12.08.2018 12:00:01"/>
+            <column name="last_update_date" value="07.09.2018 : 10:10:10"/>
+            <column name="is_active" value="TRUE"/>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Conor"/>
+            <column name="phone" value="88003553555"/>
+            <column name="email" value="admin@gmail.com"/>
+            <column name="nick_name" value="admin"/>
+            <column name="password" value="$2a$10$LxTMU51ynTUJpDyUZdfShuuOXVJJFiwnOmAmnQ3UXR4V68YN0Q2QS"/>
+            <column name="role" value="ROLE_ADMIN"/>
+            <column name="ban_status" value="NOT_BAN"/>
+            <column name="registration_date" value="12.06.2018 12:00:01"/>
+            <column name="last_update_date" value="02.09.2018 : 10:10:10"/>
+            <column name="is_active" value="TRUE"/>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="Sara"/>
+            <column name="last_name" value="Conor"/>
+            <column name="phone" value="88004557564"/>
+            <column name="email" value="owner@gmail.com"/>
+            <column name="nick_name" value="owner"/>
+            <column name="password" value="$2a$10$iv9c8suPgZ71dQAw25i3/eA639RTtHVX59fThBNfYybvhWnSMdl9a"/>
+            <column name="role" value="ROLE_OWNER"/>
+            <column name="ban_status" value="NOT_BAN"/>
+            <column name="registration_date" value="12.08.2012 12:00:01"/>
+            <column name="last_update_date" value="01.06.2018 : 10:10:10"/>
+            <column name="is_active" value="TRUE"/>
+        </insert>
+        <insert tableName="users">
+            <column name="first_name" value="Arnold"/>
+            <column name="last_name" value="Shwartzneger"/>
+            <column name="phone" value="1111"/>
+            <column name="email" value="manager@gmail.com"/>
+            <column name="nick_name" value="manager"/>
+            <column name="password" value="$2a$10$2J8YaN9kMcpwvaMtE7qJTOnYwusXKwk8HVao3GlsTRRt4NSdkJRKq"/>
+            <column name="role" value="ROLE_MANAGER"/>
+            <column name="ban_status" value="NOT_BAN"/>
+            <column name="registration_date" value="12.08.2018 12:00:01"/>
+            <column name="last_update_date" value="07.09.2018 : 10:10:10"/>
+            <column name="is_active" value="TRUE"/>
+        </insert>
+    </changeSet>
+
+    <!-- Places -->
+    <changeSet id="2" author="rv036">
+        <insert tableName="places">
+            <column name="name" value="Pizza Celentano"/>
+            <column name="address" value="Slovatskoho St, 4-6, Rivne"/>
+            <column name="rating" value="4.6"/>
+            <column name="description" value="A very popular establishment that has many varieties of pizza. You can eat pizza here."/>
+            <column name="latitude" value="50.6220633"/>
+            <column name="longitude" value="26.2489738"/>
+            <column name="open" value="09:00:00"/>
+            <column name="close" value="23:00:00"/>
+            <column name="count_free_places" value="5"/>
+            <column name="place_type" value="CAFE"/>
+            <column name="owner_id" value="3"/>
+            <column name="is_approved" value="TRUE"/>
+            <column name="is_rejected" value="FALSE"/>
+            <column name="is_banned" value="FALSE"/>
+        </insert>
+        <insert tableName="places">
+            <column name="name" value="Manhattan"/>
+            <column name="address" value="Rivne"/>
+            <column name="rating" value="4.3"/>
+            <column name="description" value="The best hotel in city with many beautiful rooms"/>
+            <column name="latitude" value="50.6203452"/>
+            <column name="longitude" value="26.2486262"/>
+            <column name="open" value="00:00:01"/>
+            <column name="close" value="23:59:00"/>
+            <column name="count_free_places" value="10"/>
+            <column name="place_type" value="HOTEL"/>
+            <column name="owner_id" value="3"/>
+            <column name="is_approved" value="TRUE"/>
+            <column name="is_rejected" value="FALSE"/>
+            <column name="is_banned" value="FALSE"/>
+        </insert>
+        <insert tableName="places">
+            <column name="name" value="Стоянка МИР"/>
+            <column name="address" value="Rivne"/>
+            <column name="rating" value="4"/>
+            <column name="description" value="The best parking"/>
+            <column name="latitude" value="50.6203138"/>
+            <column name="longitude" value="26.2503237"/>
+            <column name="open" value="09:00:00"/>
+            <column name="close" value="23:00:00"/>
+            <column name="count_free_places" value="7"/>
+            <column name="place_type" value="PARKING"/>
+            <column name="owner_id" value="3"/>
+            <column name="is_approved" value="TRUE"/>
+            <column name="is_rejected" value="FALSE"/>
+            <column name="is_banned" value="FALSE"/>
+        </insert>
+        <insert tableName="places">
+            <column name="name" value="McDonald's"/>
+            <column name="address" value="Rivne"/>
+            <column name="rating" value="5"/>
+            <column name="description" value="Fast food restaurant"/>
+            <column name="latitude" value="50.6189508"/>
+            <column name="longitude" value="26.2488015"/>
+            <column name="open" value="09:00:00"/>
+            <column name="close" value="23:00:00"/>
+            <column name="count_free_places" value="20"/>
+            <column name="place_type" value="RESTAURANT"/>
+            <column name="owner_id" value="3"/>
+            <column name="is_approved" value="TRUE"/>
+            <column name="is_rejected" value="FALSE"/>
+            <column name="is_banned" value="FALSE"/>
+        </insert>
+    </changeSet>
+
+    <!-- Feedback -->
+    <changeSet id="3" author="rv036">
+        <insert tableName="feedbacks">
+            <column name="comment" value="Very bad place"/>
+            <column name="creation_date" value="07.09.2016 02:30:01"/>
+            <column name="user_id" value="2"/>
+            <column name="place_id" value="1"/>
+        </insert>
+        <insert tableName="feedbacks">
+            <column name="comment" value="Nice place"/>
+            <column name="creation_date" value="05.28.2017 12:00:01"/>
+            <column name="user_id" value="1"/>
+            <column name="place_id" value="1"/>
+        </insert>
+        <insert tableName="feedbacks">
+            <column name="comment" value="I like it"/>
+            <column name="creation_date" value="10.04.2018 13:00:01"/>
+            <column name="user_id" value="4"/>
+            <column name="place_id" value="1"/>
+        </insert>
+    </changeSet>
+
+    <!-- Marks -->
+    <changeSet id="4" author="rv036">
+        <insert tableName="mark">
+            <column name="mark" value="2"/>
+            <column name="user_id" value="2"/>
+            <column name="place_id" value="1"/>
+        </insert>
+        <insert tableName="mark">
+            <column name="mark" value="4"/>
+            <column name="user_id" value="3"/>
+            <column name="place_id" value="1"/>
+        </insert>
+        <insert tableName="mark">
+            <column name="mark" value="5"/>
+            <column name="user_id" value="4"/>
+            <column name="place_id" value="1"/>
+        </insert>
+    </changeSet>
+
+    <!-- Booking -->
+    <!--<changeSet id="6" author="rv036">-->
+        <!--<insert tableName="booking">-->
+            <!--<column name="user_id" value="1"/>-->
+            <!--<column name="place_id" value="1"/>-->
+            <!--<column name="booking_time" value="10:00"/>-->
+            <!--<column name="status" value="1"/>-->
+        <!--</insert>-->
+        <!--<insert tableName="booking">-->
+            <!--<column name="user_id" value="1"/>-->
+            <!--<column name="place_id" value="2"/>-->
+            <!--<column name="booking_time" value="12:00"/>-->
+            <!--<column name="status" value="1"/>-->
+        <!--</insert>-->
+        <!--<insert tableName="booking">-->
+            <!--<column name="user_id" value="1"/>-->
+            <!--<column name="place_id" value="2"/>-->
+            <!--<column name="booking_time" value="13:30"/>-->
+            <!--<column name="status" value="2"/>-->
+        <!--</insert>-->
+        <!--<insert tableName="booking">-->
+            <!--<column name="user_id" value="2"/>-->
+            <!--<column name="place_id" value="2"/>-->
+            <!--<column name="booking_time" value="14:30"/>-->
+            <!--<column name="status" value="0"/>-->
+        <!--</insert>-->
+        <!--<insert tableName="booking">-->
+            <!--<column name="user_id" value="3"/>-->
+            <!--<column name="place_id" value="1"/>-->
+            <!--<column name="booking_time" value="16:00"/>-->
+            <!--<column name="status" value="0"/>-->
+        <!--</insert>-->
+        <!--<insert tableName="booking">-->
+            <!--<column name="user_id" value="1"/>-->
+            <!--<column name="place_id" value="2"/>-->
+            <!--<column name="booking_time" value="9:00"/>-->
+            <!--<column name="status" value="0"/>-->
+        <!--</insert>-->
+    <!--</changeSet>-->
+</databaseChangeLog>

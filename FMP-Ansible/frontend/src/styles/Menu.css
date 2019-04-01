@@ -1,0 +1,111 @@
+.menu-container {
+    background-color: rgba(0 ,0 ,0 , 0.5);
+    width: 100%;
+}
+
+.menu-wrapper {
+    vertical-align: baseline;
+}
+
+.menu-wrapper .brand-logo, .menu-wrapper .menu ul {
+    float: left !important;
+}
+
+.menu-wrapper .brand-logo {
+    background: url("/img/home/logo.png") no-repeat center;
+    background-size: contain;
+    position: relative !important;
+    width: 140px;
+    min-height: 70px;
+    line-height: 70px;
+    margin: 0 30px 0 20px;
+    padding: 10px 0 !important;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.menu-wrapper .menu {
+    height: auto;
+    box-shadow: none;
+    background: none !important;
+}
+
+.menu-wrapper .menu .nav-wrapper .col {
+    display: flex;
+}
+
+.menu-wrapper .menu ul {
+    flex: 1;
+}
+
+.menu-wrapper .menu li a {
+    font-size: 16px;
+    padding: 10px 20px;
+    line-height: 70px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu-wrapper .menu li a:hover,
+.menu-wrapper .menu #auth-sign-up button:hover {
+    color: #e23c52;
+}
+
+.menu-wrapper .menu #auth-sign-in,
+.menu-wrapper .menu #auth-sign-up,
+.menu-wrapper .menu #auth-sign-out,
+.menu-wrapper .menu #search {
+    float:right;
+}
+
+.menu-wrapper .menu #auth-sign-up button {
+    text-transform: none;
+    letter-spacing: 0;
+    background-color: #1d2120;
+    border-radius: 4px;
+}
+
+.menu-wrapper .menu #search {
+    font-size: 26px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.menu-wrapper .menu #search i {
+    font-size: 26px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.place-page-mixin {
+    position: absolute;
+    top: 0;
+    max-height: 90px;
+}
+
+.dropdown-button {
+    float: right;
+}
+
+.dropdown-content {
+    margin-top: 40px;
+    min-width: 130px;
+    background-color: #1d2120;
+}
+
+.dropdown-content li a {
+    text-align: center;
+    padding: 5px 20px !important;
+    line-height: 40px !important;
+    border-radius: 4px;
+}
+
+.dropdown-content li:hover {
+    background-color: transparent;
+}

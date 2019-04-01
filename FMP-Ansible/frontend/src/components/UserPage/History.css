@@ -1,0 +1,45 @@
+.history-container {
+    height: 800px;
+    overflow: auto;
+}
+
+.history-item-wrapper {
+    background-color: #ffffff;
+    padding: 5px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    position: relative;
+}
+
+.history-img-wrapper {
+    width: 200px;
+    height: 150px;
+    margin-left: 5px;
+    padding-right: 10px;
+}
+
+.history-item-name p {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.history-item-wrapper .row {
+    margin: 0;
+}
+
+.history-item-wrapper .col {
+    padding: 0;
+}
+
+.history-item-wrapper p {
+    margin: 5px;
+}
+
+.history-item-rating {
+    margin: 5px;
+}
+
+/*.history-visit-time {*/
+    /*position: absolute;*/
+    /*bottom: 5px;*/
+/*}*/

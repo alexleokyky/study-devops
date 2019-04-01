@@ -1,0 +1,23 @@
+.places-wrapper .title {
+    padding: 0 1rem;
+    margin-bottom: 30px;
+}
+
+.missing-text h3 {
+    margin: 0;
+    padding-top: 20px;
+}
+
+.user-places-wrapper h5 {
+    padding-top: 20px;
+    margin: 0;
+}
+
+.places-wrapper .places-filter, .places-wrapper .filter-wrapper {
+    margin-bottom: 0;
+}
+
+.btn-book {
+    height: 32px;
+    line-height: 32px;
+}

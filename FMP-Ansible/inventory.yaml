@@ -1,0 +1,22 @@
+---
+all:
+  hosts:
+    api:
+      ansible_host:192.168.1.10
+      ansible_port:8080
+    frontend:
+      ansible_host:192.168.1.11
+      ansible_port:3000
+    db_master:
+      ansible_host:192.168.1.12
+      ansible_port:5432
+    db_slave:
+      ansible_host:192.168.1.13
+      ansible_port:5432
+  children:
+    db:
+      hosts:
+       db_master
+       db_slave
+    
+  

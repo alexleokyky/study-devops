@@ -1,0 +1,71 @@
+.form-wrapper{
+    padding-top: 100px;
+}
+
+.app-form {
+    width: 30%;
+    margin: 0 auto;
+    padding: 30px 0;
+    font-size: 16px;
+    text-align: center;
+    background: #ffffff;
+    opacity: 0.9;
+    border-radius: 3px;
+}
+
+.app-form h2,
+.app-form input::placeholder,
+.app-form .confirm-row .forgot-password-link {
+    color: #1d2120;
+}
+
+.app-form h2,
+.app-form .col {
+    margin: 0;
+}
+
+.app-form h2 {
+    padding-bottom: 20px;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.app-form .row {
+    margin-bottom: 0;
+}
+
+.app-form .col {
+    padding: 0 3rem;
+}
+
+.app-form .confirm-row {
+    width: 70%;
+    margin: 20px auto 0 auto;
+}
+
+.app-form .confirm-row .btn {
+    width: 50%;
+    font-size: 17px;
+    color: #edd9c0;
+    text-transform: none;
+    background-color: #1d2120;
+    border-radius: 4px;
+}
+
+.app-form .confirm-row .forgot-password-link {
+    margin: 20px;
+    padding: 5px;
+}
+
+.app-form .check-register {
+    margin-top: 20px;
+}
+
+.app-form .check-register span {
+    margin-right: 20px;
+}
+
+.errorMsg {
+    color: #cc0000;
+    margin-bottom: 12px;
+}

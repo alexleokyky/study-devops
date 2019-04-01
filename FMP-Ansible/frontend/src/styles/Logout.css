@@ -1,0 +1,12 @@
+.logout img {
+    margin: 40% 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.logout a {
+    padding: 0 0 !important;
+    display: flex !important;
+}

@@ -1,0 +1,20 @@
+.contact-form-wrapper {
+    padding-top: 100px;
+}
+
+.contact-form {
+    text-align: center !important;
+    background: #ffffff;
+    margin: 0 auto;
+    opacity: 0.9;
+    padding: 30px;
+    width: 50%;
+}
+
+.contact-form input::placeholder, textarea::placeholder {
+    color: rgb(103, 109, 108) !important;
+}
+
+.contact-form textarea {
+    min-height: 150px;
+}

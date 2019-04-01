@@ -1,0 +1,66 @@
+.leaflet-container {
+    height: 800px;
+
+}
+.up-row {
+    padding: 0px 1px;
+    background-color: rgba(0 ,0 ,0 ,0.3);
+    color: #edd9c0;
+    margin-bottom: 0px;
+}
+
+.up-row .row{
+    margin-bottom: 0px;
+}
+
+.map-row {
+    margin-bottom: 0px;
+}
+
+.up-row .col .input-field label{
+    color: #fff6e4;
+}
+
+
+.up-row #check-row-filter{
+    margin-top: 15px;
+    position: relative;
+
+}
+
+.up-row #check-row-filter label{
+   color: #fff6e4;
+    font-size: 20px;
+}
+
+.up-row .switch {
+     margin: 50px 0px;
+}
+
+.up-row .btn {
+    font-size: 17px;
+    color: #edd9c0;
+    text-transform: none;
+    letter-spacing: 0px;
+    background-color: rgba(29, 33, 32, 0.56);
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 0px 7px;
+}
+
+.up-row #gps {
+    float: right;
+}
+.up-row #filter {
+    float: left;
+}
+
+
+
+
+
+
+
+
+

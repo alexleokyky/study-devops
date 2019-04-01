@@ -1,0 +1,53 @@
+.footer-container {
+    padding: 15px 0;
+    background-color: #1d2120;
+}
+
+.footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.footer .col {
+    float: left;
+    width: 25%;
+    padding: 15px 0;
+}
+
+.footer .col a {
+    color: #fff;
+}
+
+.footer .social-icon {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.footer #social-fb {
+    background: url(/img/social/facebook.png) no-repeat;
+}
+
+.footer #social-twitter {
+    background: url(/img/social/twitter.png) no-repeat;
+}
+
+
+.footer #social-instagram {
+    background: url(/img/social/instagram.png) no-repeat;
+}
+
+.footer #social-fb,
+.footer #social-twitter,
+.footer #social-instagram {
+    background-size: contain;
+}
+
+.footer .copyright {
+    font-size: 14px;
+    color: #c2c2d6;
+    clear: both;
+}

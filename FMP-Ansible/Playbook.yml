@@ -1,0 +1,48 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Create docker network
+      docker_network:
+        name: fmp-net
+        ipam_options:
+          subnet: '192.168.1.0/24'
+          gateway: 192.168.1.1
+          iprange: '192.168.1.0/24'
+- hosts: localhost
+  tasks:
+    - name: Create frontend container
+      docker_container: 
+        name: fmp-front
+        image: centos:7
+        hostname: fmp-front
+        state: present
+        detach: yes
+        tty: yes
+        interactive: yes
+        exposed_ports: 
+          - 3000
+        volumes:
+          - /data
+        networks:
+          - name: fmp-net
+            ipv4_address: 192.168.1.10
+- hosts: front
+  tasks:
+    - name: Install Remi repo
+      yum: 
+        name: "http://rpms.famillecollet.com/enterprise/remi-release-7.rpm"
+        state: present
+
+    - name: Import Remi GPG key
+      rpm_key:
+        key: "http://rpms.remirepo.net/RPM-GPG-KEY-remi"
+        state: present
+
+    - name: Install EPEL repo         
+      yum: name=epel-release state=present
+
+    - name: Ensure fifewalld is stoped
+      service: name=firewald state=stopped
+
+    - name: Install Node.js and npm
+      yum: name=npm state=present enablerepo=epel
