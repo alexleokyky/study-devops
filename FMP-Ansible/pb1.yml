@@ -5,27 +5,10 @@
       docker_network:
         name: fmp-net
         ipam_options:
-          subnet: '192.168.1.0/24'
-          gateway: 192.168.1.1
-          iprange: '192.168.1.0/24'
-    - name: Create frontend container
-      docker_container:
-        name: fmp_front
-        image: centos:7
-        hostname: fmp_front
-        detach: yes
-        tty: yes
-        interactive: yes
-        restart: yes
-        working_dir: /data
-        published_ports:
-          - 3000:3000       
-        volumes:
-          - ./frontend:/data
-        networks:
-          - name: fmp-net
-            ipv4_address: 192.168.32.53
-
+          subnet: '192.168.32.0/24'
+          gateway: 192.168.32.1
+          iprange: '192.168.32.0/24'
+    
     - name: Configure master Postgresql server
       docker_container:
         name: master_db_srv
@@ -44,45 +27,65 @@
           - name: fmp-net
             ipv4_address: 192.168.32.51
 
-    - name: Configure slave PostgreSQL server
-      docker_container:
-        name: slave_db_srv 
-        image: centos:7
-        hostname: slave_db_srv
-        detach: yes
-        tty: yes
-        interactive: yes
-        restart: yes
-        working_dir: /data
-        exposed_ports:
-          - 5432
-        volumes:
-          - ./postgresql:/data
-        networks:
-          - name: fmp-net
-            ipv4_address: 192.168.32.50
-
-    - name: Configure api server
-      docker_container:
-        name: api_server 
-        image: centos:7
-        hostname: api_server
-        detach: yes
-        tty: yes
-        interactive: yes
-        restart: yes
-        working_dir: /data
-        exposed_ports:
-          - 8080
-        volumes:
-          - ./api:/data
-        networks:
-          - name: fmp-net
-            ipv4_address: 192.168.32.52
+            #    - name: Configure slave PostgreSQL server
+            #      docker_container:
+            #        name: slave_db_srv 
+            #        image: centos:7
+            #        hostname: slave_db_srv
+            #        detach: yes
+            #        tty: yes
+            #        interactive: yes
+            #        restart: yes
+            #        working_dir: /data
+            #        exposed_ports:
+            #          - 5432
+            #        volumes:
+            #          - ./postgresql:/data
+            #        networks:
+            #          - name: fmp-net
+            #            ipv4_address: 192.168.32.50
+            #
+            #    - name: Configure api server
+            #      docker_container:
+            #        name: api_server 
+            #        image: centos:7
+            #        hostname: api_server
+            #        detach: yes
+            #        tty: yes
+            #        interactive: yes
+            #        restart: yes
+            #        working_dir: /data
+            #        exposed_ports:
+            #          - 8080
+            #        volumes:
+            #          - ./api:/data
+            #        networks:
+            #          - name: fmp-net
+            #            ipv4_address: 192.168.32.52
+            #
+            #    - name: Create frontend container
+            #      docker_container:
+            #        name: fmp_front
+            #        image: centos:7
+            #        hostname: fmp_front
+            #        detach: yes
+            #        tty: yes
+            #        interactive: yes
+            #        restart: yes
+            #        working_dir: /data
+            #        published_ports:
+            #          - 3000:3000       
+            #        volumes:
+            #          - ./frontend:/data
+            #        networks:
+            #          - name: fmp-net
+            #            ipv4_address: 192.168.32.53
 - hosts: db
   tasks:
     - name: Install PostgreSQL
-      yum: name=postgesql-9.6 state=present
+      yum:
+        name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-oraclelinux96-9.6-3.noarch.rpm
+        state: present
 
     - name: Install PostgreSQL server
       yum: name=postgresql9.6-server state=present
@@ -91,33 +94,33 @@
       yum: name=postgresql96-contrib state=present
 
     - name: Init database
-      command:
+      command: service pgsql-9.6 initdb
 
-- hosts: front
-  tasks:
-    - name: Install Remi repo
-      yum: 
-        name: "http://rpms.famillecollet.com/enterprise/remi-release-7.rpm"
-        state: present
-
-    - name: Import Remi GPG key
-      rpm_key:
-        key: "http://rpms.remirepo.net/RPM-GPG-KEY-remi"
-        state: present
-
-    - name: Install EPEL repo         
-      yum: name=epel-release state=present
-
-      #    - name: Ensure fifewalld is stoped
-      #  service: name=firewald state=stopped become=yes
-
-    - name: Install Node.js and npm
-      yum: name=npm state=present enablerepo=epel
-    
-    - name: Npm install
-      npm: path=/data
-
-    - name: Start server
-      shell: npm run start &
-      args: 
-          chdir: /data
+      #- hosts: front
+      #  tasks:
+      #    - name: Install Remi repo
+      #      yum: 
+      #        name: "http://rpms.famillecollet.com/enterprise/remi-release-7.rpm"
+      #        state: present
+      #
+      #    - name: Import Remi GPG key
+      #      rpm_key:
+      #        key: "http://rpms.remirepo.net/RPM-GPG-KEY-remi"
+      #        state: present
+      #
+      #    - name: Install EPEL repo         
+      #      yum: name=epel-release state=present
+      #
+      #      #    - name: Ensure fifewalld is stoped
+      #      #  service: name=firewald state=stopped become=yes
+      #
+      #    - name: Install Node.js and npm
+      #      yum: name=npm state=present enablerepo=epel
+      #    
+      #    - name: Npm install
+      #      npm: path=/data
+      #
+      #    - name: Start server
+      #      shell: npm run start &
+      #      args: 
+      #      chdir: /data
