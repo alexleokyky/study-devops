@@ -84,17 +84,39 @@
   tasks:
     - name: Install PostgreSQL
       yum:
-        name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-oraclelinux96-9.6-3.noarch.rpm
+        name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm 
+        state: present
+    - name:
+      yum:
+        name: postgresql96
+        state: present
+
+    - name: fix systemctl
+      shell: |
+        (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+        systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+        rm -f /lib/systemd/system/multi-user.target.wants/*;\
+        rm -f /etc/systemd/system/*.wants/*;\
+        rm -f /lib/systemd/system/local-fs.target.wants/*; \
+        rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+        rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+        rm -f /lib/systemd/system/basic.target.wants/*;\
+        rm -f /lib/systemd/system/anaconda.target.wants/*;
+      args:
+        executable: /bin/bash
+    - name:
+      yum:
+        name: epel-release
         state: present
 
     - name: Install PostgreSQL server
-      yum: name=postgresql9.6-server state=present
+      yum: name=postgresql96-server state=present
 
     - name: Install PostgreSQL contrib
       yum: name=postgresql96-contrib state=present
 
     - name: Init database
-      command: service pgsql-9.6 initdb
+      command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
 
       #- hosts: front
       #  tasks:
