@@ -12,7 +12,7 @@
     - name: Configure master Postgresql server
       docker_container:
         name: master_db_srv
-        image: centos:7
+        image: centos/systemd
         hostname: master_db_srv
         detach: yes
         tty: yes
@@ -23,6 +23,7 @@
           - 5432
         volumes:
           - ./postgresql:/data
+          - /sys/fs/cgroup:/sys/fs/cgroup:ro
         networks:
           - name: fmp-net
             ipv4_address: 192.168.32.51
@@ -86,24 +87,12 @@
       yum:
         name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm 
         state: present
+
     - name:
       yum:
         name: postgresql96
         state: present
 
-    - name: fix systemctl
-      shell: |
-        (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
-        systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-        rm -f /lib/systemd/system/multi-user.target.wants/*;\
-        rm -f /etc/systemd/system/*.wants/*;\
-        rm -f /lib/systemd/system/local-fs.target.wants/*; \
-        rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-        rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-        rm -f /lib/systemd/system/basic.target.wants/*;\
-        rm -f /lib/systemd/system/anaconda.target.wants/*;
-      args:
-        executable: /bin/bash
     - name:
       yum:
         name: epel-release
@@ -114,12 +103,13 @@
 
     - name: Install PostgreSQL contrib
       yum: name=postgresql96-contrib state=present
-
+    - name: test start pgsql
+      command: systemctl start postgresql-9.6
     - name: Init database
       command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
 
       #- hosts: front
-      #  tasks:
+      #  tasks::
       #    - name: Install Remi repo
       #      yum: 
       #        name: "http://rpms.famillecollet.com/enterprise/remi-release-7.rpm"
