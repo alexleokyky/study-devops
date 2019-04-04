@@ -12,18 +12,17 @@
     - name: Configure master Postgresql server
       docker_container:
         name: master_db_srv
-        image: centos/systemd
+        image: debian:9
         hostname: master_db_srv
         detach: yes
         tty: yes
         interactive: yes
         restart: yes
         working_dir: /data
-        exposed_ports:
+        exposed_ports: 
           - 5432
         volumes:
-          - ./postgresql:/data
-          - /sys/fs/cgroup:/sys/fs/cgroup:ro
+          - ./postgresql:/data 
         networks:
           - name: fmp-net
             ipv4_address: 192.168.32.51
@@ -81,32 +80,21 @@
             #        networks:
             #          - name: fmp-net
             #            ipv4_address: 192.168.32.53
-- hosts: db
+- hosts: master_db_srv
+  gather_facts: no
+  pre_tasks:
+    - name: Update repo
+      raw: apt-get -y update
+    - name: 'install python2'
+      raw: apt-get -y install python
   tasks:
     - name: Install PostgreSQL
-      yum:
-        name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm 
+      apt:
+        name: postgresql-9.6
         state: present
 
-    - name:
-      yum:
-        name: postgresql96
-        state: present
-
-    - name:
-      yum:
-        name: epel-release
-        state: present
-
-    - name: Install PostgreSQL server
-      yum: name=postgresql96-server state=present
-
-    - name: Install PostgreSQL contrib
-      yum: name=postgresql96-contrib state=present
-    - name: test start pgsql
-      command: systemctl start postgresql-9.6
-    - name: Init database
-      command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
+    - name: Start Postgresql
+      service: name=postgresql state=restarted
 
       #- hosts: front
       #  tasks::
