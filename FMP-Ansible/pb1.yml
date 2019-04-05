@@ -22,29 +22,29 @@
         exposed_ports: 
           - 5432
         volumes:
-          - ./postgresql:/data 
+          - ./postgresql:/data:rw 
         networks:
           - name: fmp-net
             ipv4_address: 192.168.32.51
 
-            #    - name: Configure slave PostgreSQL server
-            #      docker_container:
-            #        name: slave_db_srv 
-            #        image: centos:7
-            #        hostname: slave_db_srv
-            #        detach: yes
-            #        tty: yes
-            #        interactive: yes
-            #        restart: yes
-            #        working_dir: /data
-            #        exposed_ports:
-            #          - 5432
-            #        volumes:
-            #          - ./postgresql:/data
-            #        networks:
-            #          - name: fmp-net
-            #            ipv4_address: 192.168.32.50
-            #
+    - name: Configure slave PostgreSQL server
+      docker_container:
+        name: slave_db_srv 
+        image: debian:9
+        hostname: master_db_srv
+        detach: yes
+        tty: yes
+        interactive: yes
+        restart: yes
+        working_dir: /data
+        exposed_ports:
+          - 5432
+        volumes:
+          - ./postgresql:/data:rw
+        networks:
+          - name: fmp-net
+            ipv4_address: 192.168.32.50
+
             #    - name: Configure api server
             #      docker_container:
             #        name: api_server 
@@ -80,19 +80,92 @@
             #        networks:
             #          - name: fmp-net
             #            ipv4_address: 192.168.32.53
-- hosts: master_db_srv
+- hosts: all
   gather_facts: no
   pre_tasks:
     - name: Update repo
       raw: apt-get -y update
     - name: 'install python2'
-      raw: apt-get -y install python
+      raw: apt-get -y install python libpq-dev python-dev python-pip && yes | pip install psycopg2
+
+- hosts: db
   tasks:
     - name: Install PostgreSQL
       apt:
         name: postgresql-9.6
         state: present
 
+- hosts: master_db_srv
+  tasks:
+    - name: Copy configs
+      copy:
+        src: "{{ item }}"
+        dest: /etc/postgresql/9.6/main/
+        owner: postgres
+        group: postgres
+        mode: 0700
+        remote_src: yes
+      with_items:
+        - /data/master/pg_hba.conf
+        - /data/master/postgresql.conf
+      
+    - name: Start Postgresql
+      service: name=postgresql state=restarted
+
+    - name: Create postgresql user
+      postgresql_user:
+        name: developer
+        password: md55edc0e8dc716d7f4b4e2ce09de30e6fb
+        role_attr_flags: CREATEDB,SUPERUSER
+
+    - name: Create postgresql replication user
+      postgresql_user:
+        name: replication
+        password: md5f29fabe637a472bf5222b12a0bc5df77
+        role_attr_flags: CREATEDB,SUPERUSER
+
+    - name: Create fmp_db
+      postgresql_db: 
+        name: fmp_db
+        login_user: developer
+        lc_collate: en_US.UTF-8
+        lc_ctype: en_US.UTF-8
+        encoding: UTF-8
+        template: template0
+        state: present
+        
+
+    - name: Start Postgresql
+      service: name=postgresql state=restarted
+    - name: Enable Postgresql
+      service: name=postgresql state=enabled
+
+- hosts: slave_db_srv
+  tasks:
+    - name: Copy configs
+      copy:
+        src: "{{ item }}"
+        dest: /etc/postgresql/9.6/main/
+        owner: postgres
+        group: postgres
+        mode: 0700
+        remote_src: yes
+      with_items:
+        - /data/slave/pg_hba.conf
+        - /data/slave/postgresql.conf
+
+    - name: remove web dir contents
+      file: path=/home/mydata/web/{{ item }} state=absent
+      with_fileglob:
+        - /etc/postgresql/9.6/main/*
+    - name: Connect to master
+      command: su - postgres -c "pg_basebackup -h 192.168.32.51 -D /etc/postgresql/9.6/main/ -R -P -d 'host=192.168.32.51 port=5432 dbname=replication user=replication password=replication' --xlog-method=stream"
+
+    - name: Add trigger file line
+      lineinfile:
+        path: /var/lib/pgsql/9.6/data/recovery.conf
+        line: '/var/lib/pgsql/9.6/data/trigger_file'
+        state: present
     - name: Start Postgresql
       service: name=postgresql state=restarted
 
