@@ -103,11 +103,28 @@
         dest: /etc/postgresql/9.6/main/
         owner: postgres
         group: postgres
-        mode: 0700
+        mode: 0644
         remote_src: yes
       with_items:
         - /data/master/pg_hba.conf
         - /data/master/postgresql.conf
+
+    - name: Remove old configs
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /data/master/main
+        - /data/slave/main
+
+    - name: Copy current configs to data dir
+      copy:
+        src: /etc/postgresql/9.6/main/
+        dest: /data/master/main
+        mode: preserve
+        owner: postgres
+        group: postgres
+
       
     - name: Start Postgresql
       service: name=postgresql state=restarted
