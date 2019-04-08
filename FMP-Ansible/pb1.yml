@@ -94,10 +94,14 @@
       apt:
         name: postgresql-9.6
         state: present
-
+    - name: Add deployer user and add it to sudo
+      user: name=db
+          state=present
+          createhome=yes
+          groups=root append=yes
 - hosts: master_db_srv
   tasks:
-    - name: Copy configs
+    - name: Copy config
       copy:
         src: "{{ item }}"
         dest: /etc/postgresql/9.6/main/
@@ -109,25 +113,51 @@
         - /data/master/pg_hba.conf
         - /data/master/postgresql.conf
 
+
     - name: Remove old configs
       file:
         path: "{{ item }}"
         state: absent
       with_items:
         - /data/master/main
-        - /data/slave/main
 
+    - name: init postgresql
+      command: /usr/lib/postgresql/9.6/bin/initdb -D /data/master/main
+      become: yes
+      become_user: db
+      become_method: "su"
+
+
+    - name:  Create db storage
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: postgres
+
+        group: postgres
+        mode: 0700
+      with_items:
+        - /data/master/main
+
+    - name: Get config files to copy
+      command: "find /etc/postgresql/9.6/main -type f"
+      register: config_files
+ 
     - name: Copy current configs to data dir
       copy:
-        src: /etc/postgresql/9.6/main/
-        dest: /data/master/main
-        mode: preserve
+        src: "{{ item }}"
+        dest: /data/master/main/
         owner: postgres
         group: postgres
+        mode: preserve
+        remote_src: yes
+      with_items: 
+        - "{{ config_files.stdout_lines }}"
 
-      
     - name: Start Postgresql
       service: name=postgresql state=restarted
+      become: yes
+      become_user: db
 
     - name: Create postgresql user
       postgresql_user:
